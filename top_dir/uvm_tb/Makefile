@@ -35,7 +35,7 @@ hvl_sv:
 	vlog $(INCDIRS) $(HVL_SV_SOURCE)
 
 hdl_sv:
-	vlog $(INCDIRS) $(HDL_SV_SOURCE)
+	vlog $(INCDIRS) $(HDL_SV_SOURCE) +acc
 
 opt:
 	vopt hdl_top hvl_top -o top_opt
@@ -44,7 +44,7 @@ vis_opt:
 	vopt hdl_top hvl_top -o top_opt -debug -designfile design.bin
 
 sim:
-	vsim -mvchome ${QUESTA_MVC_HOME} top_opt $(UVM_OPTIONS) +nowarnTSCALE -t 1ns -c -do "run -all; quit"
+	vsim -mvchome ${QUESTA_MVC_HOME} top_opt $(UVM_OPTIONS) +nowarnTSCALE -t 1ns -do "run -all; quit"
 
 vis_sim:
 	vsim -mvchome ${QUESTA_MVC_HOME} top_opt $(UVM_OPTIONS) +nowarnTSCALE -t 1ns -c -do "run -all; quit" -qwavedb=+signal+transaction+class+uvm_schematic
